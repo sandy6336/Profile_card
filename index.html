@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <title>Profile with Email Notification</title>
+    <title>S Sandeep Kumar </title>
+    <link rel="icon" type="image/x-icon" href="smile.png">
+    <style>
+        .fav-icon.filled i {
+            color: rgb(30, 0, 255); 
+        }
+    </style>
 </head>
 
 <body>
@@ -20,48 +26,77 @@
                         <i class="far fa-heart"></i>
                     </div>
 
-                    <!-- Profile-Picture -->
+                    <!-- Profile Picture -->
                     <img src="sandy.jpg" alt="profile pic">
 
                     <h2>S Sandeep Kumar</h2>
                     <h4>Embedia</h4>
                     <p>A pioneer of smart solutions intertwines logic and technology, transforming ordinary devices into intuitive companions that enhance our lives.</p>
+                    <p class="styled-text">Keep Smiling 😊</p>
 
                     <!-- Social Icons -->
                     <div class="icons">
-                        <i class="fab fa-envelope"></i>
-                        <i class="fab fa-linkedin-in"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-facebook-f"></i>
+                        <span id="linkd" style="cursor: pointer;" onclick="window.open('https://www.linkedin.com/in/s-sandeep-kumar-876711212/', '_blank');">
+                            <i class="fab fa-linkedin-in"></i>
+                        </span>
+                        <span id="mail" style="cursor: pointer; display: inline-block;" onclick="copyToClipboardAndOpenEmail('ssandeepkumar6363@gmail.com')">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                        
+                        <span id="twit" style="cursor: pointer;" onclick="window.open('https://twitter.com/Sandeep_sandy63', '_blank');">
+                            <i class="fab fa-twitter"></i></i>
+                        </span>
+                        <span id="insta" style="cursor: pointer;" onclick="window.open('https://www.instagram.com/sandeepsandy6336/', '_blank');">
+                            <i class="fab fa-instagram"></i></i>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/2.6.4/email.min.js"></script> -->
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js'></script>
     <script>
+
+        function copyToClipboardAndOpenEmail(email) {
+            // Copy to clipboard
+            navigator.clipboard.writeText(email).then(() => {
+                console.log('Email copied to clipboard: ' + email);
+            }).catch(err => {
+                console.error('Could not copy email: ', err);
+            });
+        
+            // Open the default email client
+            window.location.href = 'mailto:' + email;
+        }
+
         // Initialize EmailJS
         (function() {
-            emailjs.init("SD7uMfEn_vgxJImTf"); // Replace with your EmailJS user ID
+            emailjs.init("SD7uMfEn_vgxJImTf"); 
         })();
 
-        document.getElementById("heart-icon").addEventListener("click", function() {
-            const templateParams = {
-                to_email: "sandeepsandy0348@gmail.com", // Change to your email address
-                message: "The heart icon was clicked!",
-            };
+        let heartClicked = false; // Variable to track if the heart has been clicked
+        let guestName = prompt("Please enter your name:"); // Ask for the guest's name
 
-            emailjs.send('service_dr4i3dm', 'template_vo78thd', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    alert("Notification sent!");
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    alert("Error sending notification.");
-                });
+        document.getElementById("heart-icon").addEventListener("click", function() {
+            if (!heartClicked) {
+                heartClicked = true;
+                this.classList.add('filled'); 
+
+                const templateParams = {
+                    to_email: "sandeepsandy0348@gmail.com", 
+                     message: `The heart icon was clicked by ${guestName}!`, // Include the guest's name
+                };
+
+                emailjs.send('service_dr4i3dm', 'template_vo78thd', templateParams)
+                    .then(function(response) {
+                        console.log('SUCCESS!', response.status, response.text);
+                        //alert("Notification sent!");
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                        //alert("Error sending notification.");
+                    });
+            }
         });
     </script>
 </body>

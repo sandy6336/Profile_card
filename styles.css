@@ -12,6 +12,9 @@ body {
 
 }
 
+
+
+
 .container {
     display: flex;
     justify-content: center;
@@ -45,6 +48,8 @@ body {
     z-index: -1;
     transition: opacity 0.5s;
 }
+
+
 
 .profile-container:hover::before {
     opacity: 0.2;
@@ -155,9 +160,21 @@ body {
 }
 
 .profile-card .icons i:hover {
-    color: #bb47d4;
+    /* color: #bb47d4; */
     transform: scale(1.2);
     cursor: pointer;
+}
+
+.styled-text {
+    padding: 0 5px 0px 5px ;
+    background-color: rgb(9, 176, 237);
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;       /* Optional: center text */
 }
 
 .profile-card a {
@@ -179,7 +196,23 @@ body {
     background: linear-gradient(to right, #2371ae 0%, #bb47d4 100%);
 }
 
+#linkd {
+    color: #2371ae;
 
+}
+#insta {
+    color: red;
+}
+
+#twit {
+    color: white;
+}
+
+#mail {
+    color: blueviolet;
+    
+
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
