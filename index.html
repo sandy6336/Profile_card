@@ -70,34 +70,48 @@
             window.location.href = 'mailto:' + email;
         }
 
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("SD7uMfEn_vgxJImTf"); 
-        })();
+       // Initialize EmailJS
+(function() {
+    emailjs.init("SD7uMfEn_vgxJImTf"); 
+})();
 
-        let heartClicked = false; // Variable to track if the heart has been clicked
-        let guestName = prompt("Please enter your name:"); // Ask for the guest's name
+let heartClicked = false; 
+document.getElementById("heart-icon").addEventListener("click", function() {
+    if (!heartClicked) {
+        heartClicked = true;
+        this.classList.add('filled'); 
 
-        document.getElementById("heart-icon").addEventListener("click", function() {
-            if (!heartClicked) {
-                heartClicked = true;
-                this.classList.add('filled'); 
+        const templateParams = {
+            to_email: "sandeepsandy0348@gmail.com", 
+        };
 
-                const templateParams = {
-                    to_email: "sandeepsandy0348@gmail.com", 
-                     message: `The heart icon was clicked by ${guestName}!`, // Include the guest's name
-                };
+        emailjs.send('service_dr4i3dm', 'template_vo78thd', templateParams)
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+            }, function(error) {
+                console.log('FAILED...', error);
+            });
+    }
+});
 
-                emailjs.send('service_dr4i3dm', 'template_vo78thd', templateParams)
-                    .then(function(response) {
-                        console.log('SUCCESS!', response.status, response.text);
-                        //alert("Notification sent!");
-                    }, function(error) {
-                        console.log('FAILED...', error);
-                        //alert("Error sending notification.");
-                    });
-            }
-        });
+// Scroll functionality for mobile
+let lastScrollTop = 0;
+const profileWrapper = document.querySelector('.profile-wrapper');
+
+window.addEventListener('scroll', function() {
+    let scrollTop = window.scrollY || document.documentElement.scrollTop;
+    
+    if (scrollTop > lastScrollTop) {
+        // Downscroll
+        profileWrapper.style.transform = 'translateY(-100%)'; // Hide the wrapper
+    } else {
+        // Upscroll
+        profileWrapper.style.transform = 'translateY(0)'; // Show the wrapper
+    }
+    
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+});
+
     </script>
 </body>
 
